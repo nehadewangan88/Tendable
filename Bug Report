@@ -1,0 +1,15 @@
+
+Description : No error is displayed when message field is left empty.
+Severity - High
+Priority - High
+Assignee - Developer's Name
+Summary : Application does not show any error when user attemps to submit the form without filling up Message field.
+Steps to Reproduce:-
+ 1. Navigate to https://www.tendable.com/
+ 2. Click on Book a Demo.
+ 3. Click on Contact us here for support.
+ 4. Fill up Email, First Name, Last Name, Company Name, Leave Message Empty , Select Marketing as Message Type and select the check box.
+ 5. Click on Submit and verify if error message is displayed.
+
+Expected Result : Error message 'Form Submission Failed' should be displayed.
+Actual Result : Error message is not displayed.
