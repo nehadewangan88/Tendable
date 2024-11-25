@@ -1,0 +1,73 @@
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+
+public class tendable {
+
+	static WebDriver driver = new ChromeDriver();
+	static WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+	static Select option = new Select(driver.findElement(By.id("message_type")));
+	public static void main(String[] args) 
+	{
+		navigateToTendable();
+		menuOptions();
+	    verifyError();
+	}
+	
+	public static void navigateToTendable()
+	{
+		driver.get("https://www.tendable.com");
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+	}
+	public static void menuOptions()
+	{
+		Assert.assertEquals("https://www.tendable.com/about-us", getCurrentURL("About"),"About Us URL is accessible");
+		presenceOfElementFound("//div[@class='navbar7_menu-left']/a[text()='Book a demo']");
+		Assert.assertEquals("https://www.tendable.com/product-features", getCurrentURL("Products"),"Products URL is accessible");
+		presenceOfElementFound("//div[@class='navbar7_menu-left']/a[text()='Book a demo']");
+		Assert.assertEquals("https://www.tendable.com/sectors", getCurrentURL("Sectors"),"Sectors URL is accessible");
+		presenceOfElementFound("//div[@class='navbar7_menu-left']/a[text()='Book a demo']");
+		Assert.assertEquals("https://www.tendable.com/content-hub/content-hub", getCurrentURL("Content Hub"),"Content Hub URL is accessible");
+		presenceOfElementFound("//div[@class='navbar7_menu-left']/a[text()='Book a demo']");
+		Assert.assertEquals("https://www.tendable.com/contact", getCurrentURL("Contact"),"Contact Us URL is accessible");
+		presenceOfElementFound("//div[@class='navbar7_menu-left']/a[text()='Book a demo']");
+	}
+
+	
+	public static void verifyError()
+	{ 
+		 
+		  getCurrentURL("Book a demo");
+		  driver.findElement(By.xpath("//a[text()='Contact us here for support']")).click(); 
+		  driver.findElement(By.id("email")).sendKeys("abc@gmail.com");
+		  driver.findElement(By.id("firstname")).sendKeys("Timmy");
+		  driver.findElement(By.id("lastname")).sendKeys("Graham");
+		  driver.findElement(By.id("company")).sendKeys("Test Company");
+		  option.selectByValue("Marketing");
+		  driver.findElement(By.xpath("//input[@type='checkbox']")).click();
+		  driver.findElement(By.xpath("//button[text()='Submit']")).click(); 
+		  presenceOfElementFound("//div[text()='Form Submission Failed']");
+    }
+	 
+	public static String getCurrentURL(String menuoption)
+	{
+		driver.findElement(By.xpath("//div[@class='navbar7_menu-left']/a[text()='"+menuoption+"']")).click();
+		String currentURL = driver.getCurrentUrl();
+		return currentURL;
+	}
+	
+	public static void presenceOfElementFound(String element)
+	{
+	   wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(element)));
+
+	}
+}
