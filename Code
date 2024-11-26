@@ -30,16 +30,13 @@ public class tendable {
 	}
 	public static void menuOptions()
 	{
-		Assert.assertEquals("https://www.tendable.com/about-us", getCurrentURL("About"),"About Us URL is accessible");
-		presenceOfElementFound("//div[@class='navbar7_menu-left']/a[text()='Book a demo']");
-		Assert.assertEquals("https://www.tendable.com/product-features", getCurrentURL("Products"),"Products URL is accessible");
-		presenceOfElementFound("//div[@class='navbar7_menu-left']/a[text()='Book a demo']");
-		Assert.assertEquals("https://www.tendable.com/sectors", getCurrentURL("Sectors"),"Sectors URL is accessible");
-		presenceOfElementFound("//div[@class='navbar7_menu-left']/a[text()='Book a demo']");
-		Assert.assertEquals("https://www.tendable.com/content-hub/content-hub", getCurrentURL("Content Hub"),"Content Hub URL is accessible");
-		presenceOfElementFound("//div[@class='navbar7_menu-left']/a[text()='Book a demo']");
-		Assert.assertEquals("https://www.tendable.com/contact", getCurrentURL("Contact"),"Contact Us URL is accessible");
-		presenceOfElementFound("//div[@class='navbar7_menu-left']/a[text()='Book a demo']");
+		String[] url_Options  = {"about-us","product-features","sectors","content-hub","contact"};
+		String[] menu_Options  = {"About","Products","Sectors","Content Hub","Contact"};
+		for(int i=0;i<url_Options.length;i++)
+		{
+			Assert.assertEquals("https://www.tendable.com/"+url_Options[i], getCurrentURL(menu_Options[i]),"URL is accessible");
+			presenceOfElementFound("//div[@class='navbar7_menu-left']/a[text()='Book a demo']");
+		}
 	}
 
 	
